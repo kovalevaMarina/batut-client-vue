@@ -1,36 +1,148 @@
 <script setup>
 import { ref } from 'vue'
 
-const data = ref("null")
-const error = ref(null)
+function generateData(count, yrange) {
+  var i = 0;
+  var series = [];
+  while (i < count) {
+    var x = (i + 1).toString();
+    var y =
+      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
-fetch(`${import.meta.env.VITE_API_PATH}/acceptances`)
-  .then((res) => {
-    if (res.status === 401) {
-      throw new Error(res.statusText)
+    series.push({
+      x: x,
+      y: y
+    });
+    i++;
+  }
+  return series;
+}
+
+const series = [{
+  name: 'Sun',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+{
+  name: 'Satur',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+{
+  name: 'Frid',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+{
+  name: 'Thurs',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+{
+  name: 'Wed',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+{
+  name: 'Tues',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+{
+  name: 'Mon',
+  data: generateData(20, {
+    min: -30,
+    max: 55
+  })
+},
+];
+const chartOptions = {
+  chart: {
+    height: 350,
+    type: 'heatmap',
+  },
+  plotOptions: {
+    heatmap: {
+      shadeIntensity: 0.5,
+      radius: 0,
+      useFillColorAsStroke: true,
+      colorScale: {
+        ranges: [{
+          from: -30,
+          to: 5,
+          name: 'done',
+          color: '#00A100'
+        },
+        {
+          from: 6,
+          to: 20,
+          name: 'last',
+          color: '#CBD5E1'
+        },
+        {
+          from: 21,
+          to: 45,
+          name: 'sent',
+          color: '#FFB200'
+        },
+        {
+          from: 46,
+          to: 55,
+          name: 'fail',
+          color: '#FF0000'
+        }
+        ]
+      }
     }
-  })
-  .catch((err) => {
-    error.value = err
-  })
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    width: 1
+  },
+  title: {
+    text: 'HeatMap Chart with Color Range'
+  },
+};
+
+
+
+// const data = ref("null")
+// const error = ref(null)
+
+// fetch(`${import.meta.env.VITE_API_PATH}/acceptances`)
+//   .then((res) => {
+//     if (res.status === 401) {
+//       throw new Error(res.statusText)
+//     }
+//   })
+//   .catch((err) => {
+//     error.value = err
+//   })
 </script>
 
 <template>
-  <main>
-    <p>{{ error }}</p>
-    <p class="text-red-500">Hello wordl</p>
-    <label for="my-modal-6" class="btn">open modal</label>
+  <!-- TODO: інсталювати чарт та зробити верстку-->
+  <main class="max-w-[380px] mx-auto">
+    <p class="text-red-500 bg-slate-400">Hello wordl</p>
 
-    <!-- Put this part before </body> tag -->
-    <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-    <div class="modal modal-bottom sm:modal-middle">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
-        <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-        <div class="modal-action">
-          <label for="my-modal-6" class="btn">Yay!</label>
-        </div>
-      </div>
+
+    <div id="chart">
+      <apexchart type="heatmap" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
+
   </main>
 </template>
