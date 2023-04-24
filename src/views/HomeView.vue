@@ -1,71 +1,36 @@
 <script setup>
 import { ref } from 'vue'
 
-function generateData(count, yrange) {
-  var i = 0;
-  var series = [];
-  while (i < count) {
-    var x = (i + 1).toString();
-    var y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
-    series.push({
-      x: x,
-      y: y
-    });
-    i++;
-  }
-  return series;
-}
 
 const series = [{
   name: 'Sun',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  data: [{ x: 1, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 4 }]
 },
 {
-  name: 'Satur',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  name: 'Sat',
+  data: [{ x: 1, y: 1 }]
 },
 {
-  name: 'Frid',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  name: 'Fri',
+  data: [{ x: 1, y: 1 }]
+
 },
 {
-  name: 'Thurs',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  name: 'Thu',
+  data: [{ x: 1, y: 1 }]
 },
 {
   name: 'Wed',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  data: [{ x: 1, y: 1 }]
 },
 {
-  name: 'Tues',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  name: 'Tue',
+  data: [{ x: 1, y: 1 }]
 },
 {
   name: 'Mon',
-  data: generateData(9, {
-    min: -30,
-    max: 55
-  })
+  data: [{ x: 1, y: 1 }]
 },
 ];
 const chartOptions = {
@@ -76,10 +41,21 @@ const chartOptions = {
     axisTicks: {
       show: false,
     },
+    tooltip: {
+      enabled: false,
+    },
+  },
+  legend: {
+    position: 'bottom',
+    horizontalAlign: 'right',
+    itemMargin: {
+      horizontal: 13,
+    },
   },
   chart: {
     height: 350,
     type: 'heatmap',
+    toolbar: false
   },
   plotOptions: {
     heatmap: {
@@ -88,31 +64,36 @@ const chartOptions = {
       useFillColorAsStroke: false,
       colorScale: {
         ranges: [{
-          from: -30,
-          to: 5,
+          from: 1,
+          to: 1,
           name: 'done',
           color: '#00A100'
         },
         {
-          from: 6,
-          to: 20,
-          name: 'last',
-          color: '#CBD5E1'
+          from: 2,
+          to: 2,
+          name: 'fail',
+          color: '#FF0000'
         },
         {
-          from: 21,
-          to: 45,
+          from: 3,
+          to: 3,
           name: 'sent',
           color: '#FFB200'
         },
         {
-          from: 46,
-          to: 55,
-          name: 'fail',
-          color: '#FF0000'
-        }
+          from: 4,
+          to: 4,
+          name: 'unfinished',
+          color: '#CBD5E1'
+        },
         ]
       }
+    }
+  },
+  tooltip: {
+    custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+      return '<div class="p-1 text-xs tracking-tight">Monday, October 12, 2023</div>'
     }
   },
   dataLabels: {
@@ -125,8 +106,11 @@ const chartOptions = {
     show: false,
   },
   title: {
-    text: 'HeatMap Chart with Color Range'
-  },
+    text: '12.10.2023 — 20.11.2023',
+    align: 'center',
+    offsetX: 14,
+    offsetY: 14,
+  }
 };
 // TODO: зробити як на github. Додати hover action для кожного квадрату з інформацією про дату.
 
