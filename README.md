@@ -39,3 +39,6 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+<!-- TODO: Ревізія readme -->
+<!-- TODO: deploy to github pages-->

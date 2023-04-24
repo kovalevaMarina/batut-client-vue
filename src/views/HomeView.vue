@@ -20,55 +20,63 @@ function generateData(count, yrange) {
 
 const series = [{
   name: 'Sun',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 {
   name: 'Satur',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 {
   name: 'Frid',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 {
   name: 'Thurs',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 {
   name: 'Wed',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 {
   name: 'Tues',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 {
   name: 'Mon',
-  data: generateData(20, {
+  data: generateData(9, {
     min: -30,
     max: 55
   })
 },
 ];
 const chartOptions = {
+  xaxis: {
+    labels: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
   chart: {
     height: 350,
     type: 'heatmap',
@@ -77,7 +85,7 @@ const chartOptions = {
     heatmap: {
       shadeIntensity: 0.5,
       radius: 0,
-      useFillColorAsStroke: true,
+      useFillColorAsStroke: false,
       colorScale: {
         ranges: [{
           from: -30,
@@ -111,13 +119,16 @@ const chartOptions = {
     enabled: false
   },
   stroke: {
-    width: 1
+    width: 1,
+  },
+  grid: {
+    show: false,
   },
   title: {
     text: 'HeatMap Chart with Color Range'
   },
 };
-
+// TODO: зробити як на github. Додати hover action для кожного квадрату з інформацією про дату.
 
 
 // const data = ref("null")
@@ -135,11 +146,7 @@ const chartOptions = {
 </script>
 
 <template>
-  <!-- TODO: інсталювати чарт та зробити верстку-->
   <main class="max-w-[380px] mx-auto">
-    <p class="text-red-500 bg-slate-400">Hello wordl</p>
-
-
     <div id="chart">
       <apexchart type="heatmap" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
