@@ -1,38 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import json from "../../response.json"
 
-
-
-const series = [{
-  name: 'Sun',
-  data: [{ x: 1, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 4 }]
-},
-{
-  name: 'Sat',
-  data: [{ x: 1, y: 1 }]
-},
-{
-  name: 'Fri',
-  data: [{ x: 1, y: 1 }]
-
-},
-{
-  name: 'Thu',
-  data: [{ x: 1, y: 1 }]
-},
-{
-  name: 'Wed',
-  data: [{ x: 1, y: 1 }]
-},
-{
-  name: 'Tue',
-  data: [{ x: 1, y: 1 }]
-},
-{
-  name: 'Mon',
-  data: [{ x: 1, y: 1 }]
-},
-];
 const chartOptions = {
   xaxis: {
     labels: {
@@ -84,7 +53,7 @@ const chartOptions = {
         {
           from: 4,
           to: 4,
-          name: 'unfinished',
+          name: 'pending',
           color: '#CBD5E1'
         },
         ]
@@ -92,8 +61,8 @@ const chartOptions = {
     }
   },
   tooltip: {
-    custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-      return '<div class="p-1 text-xs tracking-tight">Monday, October 12, 2023</div>'
+    custom: function ({ seriesIndex, dataPointIndex }) {
+      return `<div class="p-1 text-xs tracking-tight">${json.series[seriesIndex].data[dataPointIndex].date}</div> `
     }
   },
   dataLabels: {
@@ -112,13 +81,11 @@ const chartOptions = {
     offsetY: 14,
   }
 };
-// TODO: зробити як на github. Додати hover action для кожного квадрату з інформацією про дату.
-
 
 // const data = ref("null")
 // const error = ref(null)
 
-// fetch(`${import.meta.env.VITE_API_PATH}/acceptances`)
+// fetch(`${ import.meta.env.VITE_API_PATH }/acceptances`)
 //   .then((res) => {
 //     if (res.status === 401) {
 //       throw new Error(res.statusText)
@@ -132,7 +99,7 @@ const chartOptions = {
 <template>
   <main class="max-w-[380px] mx-auto">
     <div id="chart">
-      <apexchart type="heatmap" height="350" :options="chartOptions" :series="series"></apexchart>
+      <apexchart type="heatmap" height="350" :options="chartOptions" :series="json.series"></apexchart>
     </div>
 
   </main>
