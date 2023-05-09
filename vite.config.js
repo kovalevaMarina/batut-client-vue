@@ -7,6 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
+  // TODO: з'ясувати чому не відкривається сторінка та білий екран
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
