@@ -90,7 +90,7 @@ const chartOptions = {
     <div id="chart" v-if="WebApp.initData !== ''">
       <apexchart type="heatmap" height="350" :options="chartOptions" :series="json.series"></apexchart>
     </div>
-    <div>
+    <div v-else>
       <h1>Hello, User!</h1>
       <p>You need to open Telegram bot</p>
       <a href="https://t.me/batutnik_bot">Batut</a>
