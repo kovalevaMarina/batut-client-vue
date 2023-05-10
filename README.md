@@ -26,3 +26,4 @@ npm run dev
 npm run build
 ```
 
+<!-- TODO: навести ревізію в усіх файлах -->
