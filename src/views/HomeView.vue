@@ -1,6 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-import json from "../../response.json"
+import { inject } from "vue";
+import json from "../../response.json";
+
+const WebApp = inject("WebApp");
 
 const chartOptions = {
   xaxis: {
@@ -81,26 +83,17 @@ const chartOptions = {
     offsetY: 14,
   }
 };
-
-// const data = ref("null")
-// const error = ref(null)
-
-// fetch(`${ import.meta.env.VITE_API_PATH }/acceptances`)
-//   .then((res) => {
-//     if (res.status === 401) {
-//       throw new Error(res.statusText)
-//     }
-//   })
-//   .catch((err) => {
-//     error.value = err
-//   })
 </script>
 
 <template>
   <main class="max-w-[380px] mx-auto">
-    <div id="chart">
+    <div id="chart" v-if="WebApp.initData !== ''">
       <apexchart type="heatmap" height="350" :options="chartOptions" :series="json.series"></apexchart>
     </div>
-
+    <div>
+      <h1>Hello, User!</h1>
+      <p>You need to open Telegram bot</p>
+      <a href="https://t.me/batutnik_bot">Batut</a>
+    </div>
   </main>
 </template>
